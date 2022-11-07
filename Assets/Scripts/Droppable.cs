@@ -21,10 +21,9 @@ public class Droppable : MonoBehaviour, IDropHandler
                 _DragObj.anchoredPosition = Vector3.zero;
             }
             else
-            {
                 // Swap part
                 CardSwap(_Draggable);
-            }
+
             // Is successfully dropped?
             _Draggable.m_IsSuccessfullyDropped = true;
         }

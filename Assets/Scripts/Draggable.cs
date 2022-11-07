@@ -40,14 +40,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (eventData.pointerDrag)
+        // If we not Successfully Dropped the card
+        if (!m_IsSuccessfullyDropped)
         {
-            // If we not Successfully Dropped the card
-            if (!m_IsSuccessfullyDropped)
-            {
-                // Move card back to last parent
-                LeanTween.move(transform.gameObject, m_LastParent.position, 0.2f).setOnComplete(() => ChangeParent(m_LastParent));
-            }
+            // Move card back to last parent
+            LeanTween.move(transform.gameObject, m_LastParent.position, 0.2f).setOnComplete(() => ChangeParent(m_LastParent));
         }
         // Make blocks raycasts true after end drop
         ChangeBlocksRaycasts(true);
