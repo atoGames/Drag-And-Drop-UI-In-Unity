@@ -1,22 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    [HideInInspector] public RectTransform m_RectTransform;
     [HideInInspector] public Transform m_LastParent;
     protected CanvasGroup _CanvasGroup;
     public bool m_IsSuccessfullyDropped;
 
     private void Start()
     {
-        // Get rectTransform 
-        m_RectTransform = transform as RectTransform;
         // add and take Ref of canvas group 
         _CanvasGroup = gameObject.AddComponent<CanvasGroup>();
     }
@@ -26,14 +18,14 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         ChangeBlocksRaycasts(false);
         // Reset 
         m_IsSuccessfullyDropped = false;
-        // Ref
+        // Ref last parent
         m_LastParent = transform.parent;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         // Start dragging
-        m_RectTransform.anchoredPosition += eventData.delta;
+        transform.localPosition += (Vector3)eventData.delta;
         // Set this to root > canvas
         ChangeParent(transform.root);
     }

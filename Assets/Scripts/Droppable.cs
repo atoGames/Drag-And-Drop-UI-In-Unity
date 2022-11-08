@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System;
 
 public class Droppable : MonoBehaviour, IDropHandler
 {
@@ -10,7 +8,7 @@ public class Droppable : MonoBehaviour, IDropHandler
         if (eventData.pointerDrag)
         {
             // Ref
-            var _DragObj = eventData.pointerDrag.transform as RectTransform;
+            var _DragObj = eventData.pointerDrag.transform;
             // For swap part
             var _Draggable = _DragObj.GetComponent<Draggable>();
             // Is this transform don't has child
@@ -18,7 +16,7 @@ public class Droppable : MonoBehaviour, IDropHandler
             {
                 _DragObj.SetParent(this.transform);
                 // Reset position
-                _DragObj.anchoredPosition = Vector3.zero;
+                _DragObj.localPosition = Vector3.zero;
             }
             else
                 // Swap part
